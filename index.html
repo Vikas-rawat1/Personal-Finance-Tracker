@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>Personal Finance Tracker</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<!-- GSAP -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+<div class="container">
+
+<h1>💰 Personal Finance Tracker</h1>
+<p class="subtitle">Track • Save • Invest • Grow with confidence</p>
+
+<input type="month" id="monthPicker">
+
+<div class="dashboard">
+  <div class="card"><small>Income</small><h2 id="income" class="income">₹0</h2></div>
+  <div class="card"><small>Expense</small><h2 id="expense" class="expense">₹0</h2></div>
+  <div class="card"><small>Savings</small><h2 id="saving" class="saving">₹0</h2></div>
+  <div class="card"><small>Investment</small><h2 id="investment" class="investment">₹0</h2></div>
+  <div class="card"><small>Balance</small><h2 id="balance" class="balance">₹0</h2></div>
+</div>
+
+<div class="main">
+
+<div class="section">
+<h3>Add Transaction</h3><br>
+<input type="date" id="date"><br><br>
+<input type="text" id="desc" placeholder="Description"><br><br>
+
+<div class="types">
+  <div class="type income active">Income</div>
+  <div class="type expense">Expense</div>
+  <div class="type saving">Saving</div>
+  <div class="type investment">Investment</div>
+</div>
+
+<input type="number" id="amt" placeholder="Amount"><br><br>
+<button onclick="addTx()">Add Transaction</button>
+</div>
+
+<div class="section">
+<h3>Recent Transactions</h3>
+<div class="list" id="list"></div>
+</div>
+
+</div>
+
+<div class="section" style="margin-top:26px">
+  <div class="chartHeader">
+    <h3>Financial Distribution</h3>
+    <select id="chartType">
+      <option value="bar">Bar</option>
+      <option value="pie">Pie</option>
+      <option value="doughnut">Doughnut</option>
+    </select>
+  </div>
+  <canvas id="financeChart" height="200"></canvas>
+</div>
+
+</div>
+
+<!-- Delete Modal -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+    <h3>Delete Transaction?</h3>
+    <p class="subtitle">This action cannot be undone</p>
+    <div class="modal-actions">
+      <button onclick="closeModal()">Cancel</button>
+      <button class="danger" onclick="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
