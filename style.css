@@ -15,6 +15,7 @@
   --accent:#2bd8a3;
   --text:#fff;
   --muted:#9ca3af;
+  --icon-offset: 20px;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -40,7 +41,47 @@ input,select,button{
   padding:14px 16px;
   border-radius:14px;
   outline:none;
+  line-height:1.1;
 }
+
+/* Ensure the view-mode select shows a white border on dark background */
+/* Make month picker and view-mode select match in size and spacing */
+#monthPicker, #viewMode {
+  flex: 1 1 0%;
+  width: auto !important;
+  box-sizing: border-box;
+  padding: 14px 16px !important;
+  padding-right: 10px !important; /* reserve space for icons */
+  border-radius: 14px !important;
+  border: 1px solid #ffffff !important;
+  background: var(--surface) !important;
+  color: var(--text) !important;
+}
+
+#viewMode {
+  /* custom white arrow, positioned slightly left to align with date icon */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23FFFFFF' d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right var(--icon-offset) center;
+  background-size: 16px 16px;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+#monthPicker {
+  /* ensure native calendar indicator has space and aligns with custom arrow */
+  /* keep native appearance so the calendar indicator stays clickable */
+  padding-right: 10px !important;
+}
+
+#monthPicker:focus, #viewMode:focus{
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.06);
+  border-color: #ffffff !important;
+  outline: none;
+}
+
+/* Hide IE/Edge native arrow expansion if present */
+select::-ms-expand { display: none; }
 /* Date & Month pickers: concise styling — white border, native indicator visible */
 #date, #monthPicker, input[type="date"], input[type="month"] {
   border-color: #ffffff; /* keep original border width, only change color */
@@ -58,6 +99,8 @@ input[type="month"]::-webkit-calendar-picker-indicator {
   filter: invert(1) brightness(2) saturate(0);
   -webkit-filter: invert(1) brightness(2) saturate(0);
   opacity: 1;
+  transform: translateX(-4px);
+  -webkit-transform: translateX(-4px);
 }
 button{
   background:linear-gradient(135deg,#2bd8a3,#54f0c0);
