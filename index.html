@@ -21,7 +21,14 @@
 <h1>💰 Personal Finance Tracker</h1>
 <p class="subtitle">Track • Save • Invest • Grow with confidence</p>
 
-<input type="month" id="monthPicker">
+<div style="display:flex;gap:10px;align-items:center;">
+  <input type="month" id="monthPicker">
+  <select id="viewMode" style="background:var(--surface);color:var(--text);border:1px solid var(--border);padding:10px 12px;border-radius:10px;">
+    <option value="current">Current month</option>
+    <option value="month">Choose month</option>
+    <option value="all">All months</option>
+  </select>
+</div>
 
 <div class="dashboard">
   <div class="card"><small>Income</small><h2 id="income" class="income">₹0</h2></div>
