@@ -33,6 +33,43 @@ body{
 h1{font-size:32px}
 .subtitle{color:var(--muted);margin:6px 0 22px}
 
+/* Promo marquee styles */
+.promo-marquee{
+  overflow:hidden;
+  border-radius:12px;
+  padding:8px 12px;
+  margin:10px 0 22px;
+  background: linear-gradient(90deg, rgba(43,216,163,0.06), rgba(43,216,163,0.02));
+  border: 1px solid rgba(43,216,163,0.08);
+}
+.marquee{
+  display:flex;
+  gap:40px;
+  white-space:nowrap;
+  align-items:center;
+  will-change:transform;
+  animation:marquee 14s linear infinite;
+}
+.marquee:hover{animation-play-state:paused}
+.marquee-item{
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:999px;
+  background: linear-gradient(90deg, rgba(43,216,163,0.12), rgba(84,240,192,0.06));
+  font-weight:700;
+  color:var(--accent);
+  border: 1px solid rgba(43,216,163,0.12);
+}
+.marquee-item strong{color:#000;padding:0 6px;border-radius:6px;background:rgba(255,255,255,0.9)}
+@keyframes marquee{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-33.333%)}
+}
+@media (max-width:768px){
+  .marquee{animation-duration:20s}
+  .marquee-item{padding:10px;font-size:15px}
+}
+
 input,select,button{
   width:100%;
   background:var(--surface);
@@ -72,6 +109,12 @@ input,select,button{
   /* ensure native calendar indicator has space and aligns with custom arrow */
   /* keep native appearance so the calendar indicator stays clickable */
   padding-right: 10px !important;
+}
+
+/* active visual state when a specific month filter is selected */
+#monthPicker.active-filter{
+  box-shadow: 0 0 0 6px rgba(43,216,163,0.06);
+  border-color: var(--accent) !important;
 }
 
 #monthPicker:focus, #viewMode:focus{
@@ -249,4 +292,55 @@ button{
   .card { padding: 14px; }
   input, select, button { padding: 12px 14px; font-size: 16px; }
 }
+
+/* ================= Custom animated mouse pointer ================= */
+.custom-cursor{
+  position:fixed;
+  left:0;
+  top:0;
+  width:40px;
+  height:40px;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:9999;
+  transition: transform .12s linear;
+  mix-blend-mode:screen;
+}
+.cursor-dot{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:12px;
+  height:12px;
+  background:var(--accent);
+  border-radius:50%;
+  transform:translate(-50%,-50%) scale(1);
+  box-shadow:0 6px 18px rgba(43,216,163,0.12), 0 2px 6px rgba(0,0,0,0.4);
+  transition: transform .15s cubic-bezier(.2,.9,.3,1), background .12s;
+}
+.cursor-ring{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:36px;
+  height:36px;
+  border-radius:50%;
+  border:2px solid rgba(43,216,163,0.16);
+  transform:translate(-50%,-50%) scale(1);
+  transition: transform .18s cubic-bezier(.2,.9,.3,1), opacity .18s;
+  opacity:0.95;
+}
+.custom-cursor.hover .cursor-dot{ transform:translate(-50%,-50%) scale(1.6); background:#fff; }
+.custom-cursor.hover .cursor-ring{ transform:translate(-50%,-50%) scale(1.15); border-color:rgba(43,216,163,0.28); opacity:1; }
+.custom-cursor.pressed .cursor-dot{ transform:translate(-50%,-50%) scale(0.8); }
+.custom-cursor.pressed .cursor-ring{ transform:translate(-50%,-50%) scale(1.6); opacity:0.6; }
+
+/* Hide on small screens and touch devices */
+@media (max-width: 768px), (pointer: coarse) {
+  .custom-cursor{ display:none; }
+  html, body { cursor: auto; }
+}
+
+/* Keep text inputs and form controls showing the native text/caret cursor */
+input, textarea, select { cursor: text !important; }
 

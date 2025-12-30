@@ -214,17 +214,26 @@ render();
   };
 
   // change handlers
-  viewModeEl.addEventListener('change',()=>{
-    // if switched to 'current' and monthPicker not matching, update monthPicker value
-    if(viewModeEl.value==='current'){
-      monthPickerEl.value = currentMonth();
-    }
+  function setViewMode(mode){
+    // update the select value and apply a visual cue when a specific month is active
+    viewModeEl.value = mode;
+    if(mode === 'month') monthPickerEl.classList.add('active-filter');
+    else monthPickerEl.classList.remove('active-filter');
+
+    // keep the month picker synced with 'current' when necessary
+    if(mode === 'current') monthPickerEl.value = currentMonth();
+
     render();
-  });
-  monthPickerEl.addEventListener('change',()=>{ if(viewModeEl.value==='month') render(); });
+  }
+
+  // wire up events
+  viewModeEl.addEventListener('change', ()=> setViewMode(viewModeEl.value));
+  monthPickerEl.addEventListener('focus', ()=> setViewMode('month'));
+  monthPickerEl.addEventListener('click', ()=> setViewMode('month'));
+  monthPickerEl.addEventListener('change', ()=> setViewMode('month'));
 
   // initialize: set to current month view
-  viewModeEl.value = 'current';
+  setViewMode('current');
   monthPickerEl.value = currentMonth();
   render();
 
