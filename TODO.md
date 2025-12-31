@@ -1,0 +1,3 @@
+- [x] Update index.html: Add class "logout-btn" to button, wrap "Logout" in span, add SVG logout icon
+- [ ] Update style.css: Move logout button styles to CSS, make fixed positioned, hide text on mobile, show icon, add responsive font sizes
+- [ ] Test responsiveness and fonts by opening index.html in browser
