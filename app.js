@@ -104,6 +104,12 @@ function confirmDelete(){
  render();
 }
 
+function syncToSheet(){
+ // Placeholder for Google Sheets sync
+ alert('Syncing data to Google Sheet... (This is a placeholder. Actual implementation requires Google API setup.)');
+ // TODO: Implement Google Sheets API integration
+}
+
 function renderChart(type){
  const ctx=document.getElementById("financeChart").getContext("2d");
  if(chart) chart.destroy();

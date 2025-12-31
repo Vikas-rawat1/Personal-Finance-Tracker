@@ -17,7 +17,7 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
         showToast('Email already exists');
         return;
     }
-    users.push({ email, password });
+    users.push({ email, password, role: email === 'admin@admin.com' ? 'admin' : 'user' });
     localStorage.setItem('users', JSON.stringify(users));
     showToast('Registration successful! Please login.', 'success');
     setTimeout(() => {
