@@ -4,6 +4,12 @@ let month=new Date().toISOString().slice(0,7);
 let chart=null;
 let deleteId=null;
 
+// Logout function
+function logout() {
+    localStorage.removeItem('loggedInUser');
+    window.location.href = 'login/login.html';
+}
+
 monthPicker.value=month;
 date.value=new Date().toISOString().slice(0,10);
 
