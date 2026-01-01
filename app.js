@@ -1,6 +1,6 @@
 let data = JSON.parse(localStorage.getItem("data")||"[]");
 let type="income";
-let month=new Date().toISOString().slice(0,7);
+let month = new Date().toISOString().slice(0,7);
 let chart=null;
 let deleteId=null;
 
@@ -11,7 +11,7 @@ function logout() {
 }
 
 monthPicker.value=month;
-date.value=new Date().toISOString().slice(0,10);
+date.value = new Date().toISOString().slice(0,10);
 
 document.querySelectorAll(".type").forEach(t=>{
  t.onclick=()=>{
@@ -147,7 +147,7 @@ render();
   // default view: show current month on dashboard
   viewModeEl.value = 'current';
 
-  function currentMonth(){ return new Date().toISOString().slice(0,7); }
+  function currentMonth(){ return new Date().getFullYear() + '-' + new Date().toISOString().slice(5,7); }
 
   function getFilterMonth(){
     const mode = viewModeEl.value;
